@@ -1,18 +1,31 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
+/**
+ * Clase que hace la repartición de equipos, les asigna un paquete de herramientas y un campo de entrenamiento.
+ */
 public class EquiposNinja{
     
+    /**Los grupos de aspirantes y voluntarios junto con sus iteradores. */
     private Grupos grupos= new Grupos();
-    private HashMap<NinjaVoluntario, ArrayList<NinjaAspirante>> equiposFormados= new HashMap<>();
 
+    /**Array list que almacena a los equipos formados. */
+    private ArrayList<Equipo> equiposFormados= new ArrayList<>();
+
+    /**
+     * Constructor de los equipos Ninja. No hay parametros, pues los grupos de ninjas ya han sido creados
+     * y el array list de equipos se hará después.
+     */
     public EquiposNinja(){
         grupos= new Grupos();
-        equiposFormados= new HashMap<>();
+        equiposFormados= new ArrayList<>();
     }
 
+    /**
+     * Método que hace uso de los iteradores de cada grupo y forma los equipos haciendo uso del rango de los ninjas voluntarios que son lideres.
+     * Imprime mensajes en terminal que simulan la repartición de equipos y anuncia cuando a un lider no se le asigna aspirantes o cuando a los 
+     * aspirantes no se les asigna algun lider. 
+     */
     public void formarEquipos(){
 
         Iterator aspirantes= grupos.getIteradorAspirantes();
@@ -39,7 +52,8 @@ public class EquiposNinja{
             }
 
             if(!aspirantesDelEquipo.isEmpty()){
-                equiposFormados.put(lider,aspirantesDelEquipo);
+                Equipo nuevoEquipo= new Equipo(lider, aspirantesDelEquipo);
+                equiposFormados.add(nuevoEquipo);
             } else{
                 System.out.println("\nYa no quedan más aspirantes. " + lider.getNombre() + " no esta al frente de algún equipo.");
             }
@@ -63,9 +77,57 @@ public class EquiposNinja{
         
     }
 
-    public HashMap<NinjaVoluntario, ArrayList<NinjaAspirante>> getEquiposFormados(){
+    /**
+     * Método que simula la repartición de un campo de entrenamiento a un equipo e imprime los detalles.
+     */
+    public void repartirCampo(){
+        System.out.println("Continuamos con la etapa de asignación de campos de entrenamiento. Cada equipo tendrá derecho a un campo donde entrenará y este se les asignará " + 
+                            "evaluando la suma de las habilidades de los integrantes. Veamos:\n");
+        System.out.println("* Si la suma del nivel de habilidad del equipo es menor o igual a 7, entonces entrenará en el Valle Del Dragón.");
+        System.out.println("* Si la suma del nivel de habilidad del equipo va de 8 a 11, entonces entrenará en el Bosque Sombrío.");
+        System.out.println("* Si la suma del nivel de habilidad del equipo es mayor o igual a 12, entonces entrenará en la Montaña Espiritual.");
+
+        System.out.println("\n¡QUE COMIENCE LA ASIGNACIÓN!");
+
+        int numEquipo=1;
+
+        for(Equipo equipo: this.getEquiposFormados()){
+            int sumaTotal= equipo.getSumaHabilidad();
+            CampoFabrica fabrica= CampoFabrica.elegirFabrica(sumaTotal);
+            CampoEntrenamiento campo= fabrica.asignarCampo();
+            equipo.setCampoDeEntrenamiento(campo);
+
+            System.out.println("Equipo " + numEquipo + " con el lider " + equipo.getLider().getNombre() + ":");
+            System.out.println("Con una suma de nivel de habilidad de " + equipo.getSumaHabilidad() + " se les ha asignado " + equipo.getCampoDeEntrenamiento().getNombre() + " para poder entrenar.");
+            System.out.println("");
+            numEquipo++;
+        }
+
+    }
+
+    /**
+     * Devuelve el array list que contiene a los equipos formados.
+     * @return la listq ue contiene a los equipos formados.
+     */
+    public ArrayList<Equipo> getEquiposFormados(){
         return equiposFormados;
     }
+
+    /**
+     * Método que imprime cada equipo en la lista de equipos formados junto con su información.
+     */
+    public void imprimirEquipos(){
+
+        ArrayList<Equipo> equiposFormados= this.getEquiposFormados();
+
+        for(int i=0; i<equiposFormados.size(); i++){
+            System.out.println("= EQUIPO " + (i+1) + " =");
+            equiposFormados.get(i).imprimirEquipo();
+        }
+
+    }
+
+    
 
     
 }
