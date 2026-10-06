@@ -26,6 +26,7 @@ public class Equipo{
     public Equipo(NinjaVoluntario lider, ArrayList<NinjaAspirante> integrantes){
         this.lider=lider;
         this.integrantes=integrantes;
+        this.paqueteHerramientas= null;
         this.campoDeEntrenamiento=null;
     }
 

@@ -11,9 +11,12 @@ public class AcademiaNinja{
 
         EquiposNinja equiposNinja = new EquiposNinja();
 
+        System.out.println("\n*_*_*_*_* ACADEMIA NINJA DE LA ALDEA DE LAS CIENCIAS *_*_*_*_*_\n");
+        System.out.println("------ Ceremonia de asignación ------");
         equiposNinja.formarEquipos();
         equiposNinja.repartirPaqueteHerramientas();
         equiposNinja.repartirCampo();
+        System.out.println("== RESUMEN DE LA CEREMONIA ==\n");
         equiposNinja.imprimirEquipos();
         
     }

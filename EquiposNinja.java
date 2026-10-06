@@ -141,7 +141,7 @@ public class EquiposNinja{
      * Método que simula la repartición de un campo de entrenamiento a un equipo e imprime los detalles.
      */
     public void repartirCampo(){
-        System.out.println("Continuamos con la etapa de asignación de campos de entrenamiento. Cada equipo tendrá derecho a un campo donde entrenará y este se les asignará " + 
+        System.out.println("Continuamos con la etapa de asignación de campos de entrenamiento. Cada equipo tendrá derecho a un campo donde entrenará\ny este se les asignará " + 
                             "evaluando la suma de las habilidades de los integrantes. Veamos:\n");
         System.out.println("* Si la suma del nivel de habilidad del equipo es menor o igual a 7, entonces entrenará en el Valle Del Dragón.");
         System.out.println("* Si la suma del nivel de habilidad del equipo va de 8 a 11, entonces entrenará en el Bosque Sombrío.");
