@@ -25,16 +25,16 @@ public class GrupoAspirantes{
             NinjaAspirante a9= new NinjaAspirante("Varg", 24, Clan.OSOMAKI, 2);
             NinjaAspirante a10= new NinjaAspirante("Bruce", 26, Clan.AKIPICHI, 3);
 
-            aspirantes.put("Retrovertigo", a1);
-            aspirantes.put("Suckerphilia", a2);
-            aspirantes.put("Floods", a3);
-            aspirantes.put("Bluish", a4);
-            aspirantes.put("Dolce", a5);
-            aspirantes.put("Becoming", a6);
-            aspirantes.put("Walk", a7);
-            aspirantes.put("Slime", a8);
-            aspirantes.put("Dunk", a9);
-            aspirantes.put("Hills", a10);
+            aspirantes.put(a1.getNombre(), a1);
+            aspirantes.put(a2.getNombre(), a2);
+            aspirantes.put(a3.getNombre(), a3);
+            aspirantes.put(a4.getNombre(), a4);
+            aspirantes.put(a5.getNombre(), a5);
+            aspirantes.put(a6.getNombre(), a6);
+            aspirantes.put(a7.getNombre(), a7);
+            aspirantes.put(a8.getNombre(), a8);
+            aspirantes.put(a9.getNombre(), a9);
+            aspirantes.put(a10.getNombre(), a10);
         } catch(IllegalArgumentException e){
             System.out.println("Error al registrar a un aspirante:" + e.getMessage());
         }
