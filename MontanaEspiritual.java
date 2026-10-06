@@ -1,14 +1,35 @@
 /**
- * Campo de entrenamiento: Montaña Espiritual
+ * Campo de Entrenamiento Montana Espiritual
  * Se asigna a los grupos segun la suma de habilidad de sus integrantes
  */
-public class MontanaEspiritual extends CampoEntrenamiento {
+public class MontanaEspiritual implements CampoEntrenamiento{
+    
+    /**
+     * Nombre del campo
+     */
+    private String nombre = "Montana Espiritual";
 
     /**
-     * Crea el campo con su nombre y descripcion
+     * Descripcion del campo
      */
-    public MontanaEspiritual(){
-        super("Montana Espiritual", "Una montaña sagrada de clima extremo donde solo entrenan los ninjas con mayor habilidad");
+    private String descripcion = "Una montaña sagrada de clima extremo donde solo entrenan los ninjas con mayor habilidad";
+
+    /**
+     * Devuelve el nombre del campo
+     * @return nombre del campo
+     */
+    @Override 
+    public String getNombre(){
+        return nombre;
     }
-    
+
+    /**
+     * Devuelve la descripcion del campo
+     * @return la descripcion del campo
+     */
+    @Override 
+    public String getDescripcion(){
+        return descripcion;
+    }
+
 }

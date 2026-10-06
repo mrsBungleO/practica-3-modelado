@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * Clase que simula como la academia ninja realiza la ceremonia de repartición de equipos, paquetes de herramientas y campo de entrenamiento.
  */
@@ -14,6 +12,7 @@ public class AcademiaNinja{
         EquiposNinja equiposNinja = new EquiposNinja();
 
         equiposNinja.formarEquipos();
+        equiposNinja.repartirPaqueteHerramientas();
         equiposNinja.repartirCampo();
         equiposNinja.imprimirEquipos();
         

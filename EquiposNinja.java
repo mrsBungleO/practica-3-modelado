@@ -12,6 +12,12 @@ public class EquiposNinja{
     /**Array list que almacena a los equipos formados. */
     private ArrayList<Equipo> equiposFormados= new ArrayList<>();
 
+    /** Builder con el que se arman los paquetes */
+    private PaqueteBuilder builder = new PaqueteBuilderConcreto();
+
+    /** Director que conoce las recetas de los paquetes prefabricados */
+    private DirectorPaquetes director = new DirectorPaquetes(builder);
+
     /**
      * Constructor de los equipos Ninja. No hay parametros, pues los grupos de ninjas ya han sido creados
      * y el array list de equipos se hará después.
@@ -76,6 +82,60 @@ public class EquiposNinja{
         }
         
     }
+
+    /**
+     * Asigna el paquete de herramientas a cada equipo formado
+     * Se reparten por turnos segun la posicion del equipo: Basico, Avanzado, Tactico y Personalizado
+     * y luego se repite el ciclo.
+     */
+    public void repartirPaqueteHerramientas(){
+        System.out.println("Ahora pasamos a las entregas de herramientas ninjas. Cada equipo recibira un paquete\n");
+        int numEquipo = 1;
+        for(Equipo equipo: this.getEquiposFormados()){
+            Paquete paquete;
+            String tipo; 
+
+            switch((numEquipo-1)%4){
+                case 0:
+                    paquete = director.construirPaqueteBasico();
+                    tipo = "Basico";
+                    break;
+                case 1:
+                    paquete = director.construirPaqueteAvanzado();
+                    tipo = "Avanzado";
+                    break;
+                case 2:
+                    paquete = director.construirPaqueteTactico();
+                    tipo = "Tactico";
+                    break;
+                default:
+                    paquete = construirPaquetePersonalizado();
+                    tipo = "Personalizado";
+                    break;
+            }
+            equipo.setPaqueteHerramientas(paquete);
+
+            System.out.println("Equipo " + numEquipo + " con el lider " + equipo.getLider().getNombre() + ": recibe el Paquete " + tipo + ".");
+            System.out.println(paquete.generarResumen());
+            System.out.println("");
+            numEquipo++;
+        }
+    }
+
+    /**
+    * Arma un paquete personalizado usando el builder directamente, sin pasar
+    * por el director:3 Kunai, 2 Papeles Bomba, 1 Bomba de Humo y 1 Botiquin
+    * @return el paquete personalizado ya construido
+    */
+   public Paquete construirPaquetePersonalizado(){
+    builder.reset();
+    builder.agregarHerramienta("kunai", 3)
+               .agregarHerramienta("papelbomba", 2)
+               .agregarHerramienta("bombahumo", 1)
+               .agregarHerramienta("botiquin", 1);
+        return builder.construir();
+    }
+
 
     /**
      * Método que simula la repartición de un campo de entrenamiento a un equipo e imprime los detalles.

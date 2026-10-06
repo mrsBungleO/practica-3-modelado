@@ -42,7 +42,7 @@ public class Paquete {
         for (Herramienta herramienta : herramientas){
             resumen += herramienta.getNombre() + " ";
         }
-        resumen += "- Peso total: " + pesoTotal + " kg";
+        resumen += "- Peso total: " + String.format("%.2f", pesoTotal) + " kg";
         return resumen;
     }
 

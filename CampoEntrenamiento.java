@@ -1,33 +1,20 @@
 /**
- * Clase base de los campos de entrenamiento. Guarda el nombre y la
- * descripcion que todos los campos tienen en comun, 
- * cada campo concreto los define en su constructor
+ * Es el producto de Factory Method, lo que las fabricas nos entregan
+ * Lo unico que le pedimos a un campo de entrenamiento es que sepa decir 
+ * su nombre y su descripcion, cada campo implementa esta interfaz
  */
-public abstract class CampoEntrenamiento {
-    protected String nombre;
-    protected String descripcion;
-    
-
+public interface CampoEntrenamiento {
     /**
-     * @param nombre nombre del campo
-     * @param descripcion breve descripcion del lugar
-     */
-    public CampoEntrenamiento(String nombre, String descripcion){
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
-
-    /**
+     * Devuelve el nombre del campo
      * @return nombre del campo
      */
-    public String getNombre(){
-        return nombre;
-    }
+    String getNombre();
 
     /**
+     * Devuelve la descripcion del campo
      * @return descripcion del campo
      */
-    public String getDescripcion(){
-        return descripcion;
-    }
+    String getDescripcion();
 }
+
+ 

@@ -11,7 +11,8 @@ public class Equipo{
     /**La lista de ninjas aspirantes que serán delegados al lider. */
     private ArrayList<NinjaAspirante> integrantes;
 
-    //paquete de herramientas
+    /**Paquete de herramientas ninja que recibe el equipo */
+    private Paquete paqueteHerramientas;
 
     /**Campo de entrenamiento donde se desempeñará el equipo. */
     private CampoEntrenamiento campoDeEntrenamiento;
@@ -44,7 +45,13 @@ public class Equipo{
         return integrantes;
     }
 
-    //FALTA EL PAQUETE DE HERRAMIENTAS
+    /**
+     * Devuelve el paquete de herramientas asignado al equipo
+     * @return el paquete del equipo o si todavia no se la asigna uno
+     */
+    public  Paquete getPaqueteHerramientas(){
+        return paqueteHerramientas;
+    }
 
     /**
      * Devuelve el campo de entrenamiento asignado al equipo.
@@ -54,7 +61,13 @@ public class Equipo{
         return campoDeEntrenamiento;
     }
 
-    //FALTA EL PAQUETE DE HERRAMIENTAS
+    /**
+     * Asigna un paquete de heramientas al equipo
+     * @param paqueteHerramientas el paquete asignado al equipo
+     */
+    public void setPaqueteHerramientas(Paquete paqueteHerramientas){
+        this.paqueteHerramientas = paqueteHerramientas;
+    }
 
     /**
      * Asigna un campo de entrenamiento al equipo. Nos sirve para hacer la simulación de esta etapa, ya que en el constructor no le asignamos
@@ -75,6 +88,7 @@ public class Equipo{
         for(NinjaAspirante integrante: this.getIntegrantes()){
             System.out.println("-" + integrante.getNombre());
         }
+        System.out.println(this.getPaqueteHerramientas().generarResumen());
         System.out.println("Campo de entrenamiento: " + this.getCampoDeEntrenamiento().getNombre() + " - " + this.getCampoDeEntrenamiento().getDescripcion());
         System.out.println("");
 
