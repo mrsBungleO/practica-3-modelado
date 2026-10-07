@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 /**
  * Clase que hace la repartición de equipos, les asigna un paquete de herramientas y un campo de entrenamiento.
@@ -84,38 +85,49 @@ public class EquiposNinja{
     }
 
     /**
-     * Asigna el paquete de herramientas a cada equipo formado
-     * Se reparten por turnos segun la posicion del equipo: Basico, Avanzado, Tactico y Personalizado
-     * y luego se repite el ciclo.
+     * Asigna el paquete de herramientas a cada equipo formado.
+     * Para cada equipo se muestra un menú y la persona que lleva la ceremonia
+     * decide, desde la terminal, si el equipo recibe el Paquete Básico, Avanzado,
+     * Táctico o uno Personalizado armado al momento.
      */
     public void repartirPaqueteHerramientas(){
-        System.out.println("Ahora pasamos a las entregas de herramientas ninjas. Cada equipo recibira un paquete\n");
+        Scanner lector = new Scanner(System.in);
+        System.out.println("Ahora pasamos a las entregas de herramientas ninjas. Para cada equipo elige el paquete que le toca.\n");
+
         int numEquipo = 1;
         for(Equipo equipo: this.getEquiposFormados()){
-            Paquete paquete;
-            String tipo; 
+            System.out.println("Equipo " + numEquipo + " con el lider " + equipo.getLider().getNombre() + ":");
+            System.out.println("1) Paquete Basico");
+            System.out.println("2) Paquete Avanzado");
+            System.out.println("3) Paquete Tactico");
+            System.out.println("4) Paquete Personalizado");
 
-            switch((numEquipo-1)%4){
-                case 0:
+            int opcion = leerOpcionPaquete(lector);
+
+            Paquete paquete;
+            String tipo;
+
+            switch(opcion){
+                case 1:
                     paquete = director.construirPaqueteBasico();
                     tipo = "Basico";
                     break;
-                case 1:
+                case 2:
                     paquete = director.construirPaqueteAvanzado();
                     tipo = "Avanzado";
                     break;
-                case 2:
+                case 3:
                     paquete = director.construirPaqueteTactico();
                     tipo = "Tactico";
                     break;
                 default:
-                    paquete = construirPaquetePersonalizado();
+                    paquete = construirPaquetePersonalizado(lector);
                     tipo = "Personalizado";
                     break;
             }
             equipo.setPaqueteHerramientas(paquete);
 
-            System.out.println("Equipo " + numEquipo + " con el lider " + equipo.getLider().getNombre() + ": recibe el Paquete " + tipo + ".");
+            System.out.println("\nEquipo " + numEquipo + " con el lider " + equipo.getLider().getNombre() + ": recibe el Paquete " + tipo + ".");
             System.out.println(paquete.generarResumen());
             System.out.println("");
             numEquipo++;
@@ -123,16 +135,61 @@ public class EquiposNinja{
     }
 
     /**
-    * Arma un paquete personalizado usando el builder directamente, sin pasar
-    * por el director:3 Kunai, 2 Papeles Bomba, 1 Bomba de Humo y 1 Botiquin
-    * @return el paquete personalizado ya construido
-    */
-   public Paquete construirPaquetePersonalizado(){
-    builder.reset();
-    builder.agregarHerramienta("kunai", 3)
-               .agregarHerramienta("papelbomba", 2)
-               .agregarHerramienta("bombahumo", 1)
-               .agregarHerramienta("botiquin", 1);
+     * Le pregunta al usuario, desde la terminal, que opcion de paquete quiere para el equipo actual.
+     * Si escribe algo que no sea un numero del 1 al 4, se lo vuelve a preguntar hasta que la respuesta sea valida.
+     * @param lector scanner ya abierto con el que se lee lo que escribe el usuario
+     * @return el numero de la opcion elegida, entre 1 y 4
+     */
+    private int leerOpcionPaquete(Scanner lector){
+        int opcion = -1;
+        while(opcion < 1 || opcion > 4){
+            System.out.print("Elige una opcion (1-4): ");
+            if(lector.hasNextInt()){
+                opcion = lector.nextInt();
+                if(opcion < 1 || opcion > 4){
+                    System.out.println("Esa opcion no existe, intenta de nuevo.");
+                }
+            } else {
+                System.out.println("Eso no es un numero, intenta de nuevo.");
+                lector.next();
+            }
+        }
+        return opcion;
+    }
+
+    /**
+     * Arma un paquete personalizado preguntandole al usuario, herramienta por herramienta,
+     * cuantas quiere agregar al paquete. Se usa el builder directamente, sin pasar por el director,
+     * ya que aqui no se sigue ninguna receta fija.
+     * @param lector scanner ya abierto con el que se lee lo que escribe el usuario
+     * @return el paquete personalizado ya construido
+     */
+    public Paquete construirPaquetePersonalizado(Scanner lector){
+        builder.reset();
+        String[] tiposDisponibles = {"kunai", "shuriken", "papelbomba", "bombahumo", "botiquin"};
+        String[] nombresBonitos = {"Kunai", "Shuriken", "Papel Bomba", "Bomba de Humo", "Botiquin"};
+
+        System.out.println("\nVamos a armar el paquete personalizado. Dinos cuantas herramientas de cada tipo quieres agregar:");
+
+        for(int i = 0; i < tiposDisponibles.length; i++){
+            int cantidad = -1;
+            while(cantidad < 0){
+                System.out.print(nombresBonitos[i] + ": ");
+                if(lector.hasNextInt()){
+                    cantidad = lector.nextInt();
+                    if(cantidad < 0){
+                        System.out.println("La cantidad no puede ser negativa, intenta de nuevo.");
+                    }
+                } else {
+                    System.out.println("Eso no es un numero, intenta de nuevo.");
+                    lector.next();
+                }
+            }
+            if(cantidad > 0){
+                builder.agregarHerramienta(tiposDisponibles[i], cantidad);
+            }
+        }
+
         return builder.construir();
     }
 
