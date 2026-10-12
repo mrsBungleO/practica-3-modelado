@@ -10,7 +10,7 @@ public interface PaqueteBuilder {
      * Agrega una cierta cantidad de una herramienta al paquete que se
      * esta armando. Se puede llamar varias veces para ir agregando
      * distintas herramientas antes de construir el paquete final
-     * @param tipo nombre de la herramienta, el mismo que usa HerramientaFabrica
+     * @param tipo nombre de la herramienta, el mismo que usa HerramientaNinja
      * @param cantidad cuantas herramientas de ese tipo se van a agregar
      * @return el mismo builder, para poder encadenar varias llamadas
      */

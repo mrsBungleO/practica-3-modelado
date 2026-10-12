@@ -1,12 +1,12 @@
 /**
- * Fabrica que se encarga de crear las herramientas ninja
+ * Clase que se encarga de crear las herramientas ninja
  * Quien necesite una herramienta se la pide por su nombre, 
  * sin tener que usar new con cada clase
  */
-public class HerramientaFabrica {
+public class HerramientasNinja {
 
     /**
-     * Crea una herramienta a partir de su nomnbre
+     * Entrega una herramienta a partir de su nomnbre
      * @param tipo "kunai", "shuriken", "papelbomba", "bombahumo" o "botiquin"
      * @return la herramienta solicitada
      * @throws IllegalArgumentException si el tipo no existe
