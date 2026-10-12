@@ -40,6 +40,10 @@ public class EquiposNinja{
 
         System.out.println("\n¡BIENVENIDOS A LA ETAPA DE REPARTICIÓN DE EQUIPOS!\n\nA cada uno de nuestros ninjas voluntarios se les asignará una cantidad de aspirantes proporcional a su rango.");
         System.out.println("Nuestros ninjas voluntarios serán los líderes de cada equipo y ayudarán a nuestros aspirantes a tener un desempeño excepcional.\n");
+        System.out.println("* Si el lider tiene el rango Genin: se le asigna 1 aspirante.");
+        System.out.println("* Si el líder tiene el rango Chunin: se le asignan 2 aspirantes.");
+        System.out.println("* Si el líder tiene el rango Jonin: se le asignan 3 participantes.\n");
+
         System.out.println("Veamos la asignación: \n");
 
         while(voluntarios.hasNext()){
@@ -53,7 +57,7 @@ public class EquiposNinja{
                 if(aspirantes.hasNext()){
                     NinjaAspirante elemento= (NinjaAspirante)aspirantes.next();
                     aspirantesDelEquipo.add(elemento);
-                    System.out.println("El aspirante " + elemento.getNombre() + " ha sido asignado al equipo de " + lider.getNombre());
+                    System.out.println("El aspirante " + elemento.getNombre() + " ha sido asignado al equipo de: " + lider.getNombre() + " con el rango de " + lider.getRango().getNombre() + "." );
                     System.out.println("============================================================================================");
                 }
             }

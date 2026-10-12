@@ -24,7 +24,7 @@ public class PaqueteBuilderConcreto implements PaqueteBuilder {
      * Le pide a la HerramientasNinja la herramienta solicitada, la cantidad de
      * veces que se indique, y la va agregando a la lista del paquete
      * que se esta armando
-     * @param tipo nombre de la herramienta, el mismo que usa HerramientaFabrica
+     * @param tipo nombre de la herramienta, el mismo que usa HerramientasNinja
      * @param cantidad cuantas herramientas de ese tipo se van a agregar
      * @return el mismo builder, para poder seguir agregando mas herramientas
      */
