@@ -10,13 +10,13 @@ import java.util.List;
  */
 public class PaqueteBuilderConcreto implements PaqueteBuilder {
     private List<Herramienta> herramientas;
-    private HerramientaFabrica fabrica;
+    private HerramientaConstructor fabrica;
 
     /**
      * Crea el builder ya listo para empezar a agregar herramientas
      */
     public PaqueteBuilderConcreto(){
-        this.fabrica = new HerramientaFabrica();
+        this.fabrica = new HerramientaConstructor();
         this.herramientas = new ArrayList<Herramienta>();
     }
 

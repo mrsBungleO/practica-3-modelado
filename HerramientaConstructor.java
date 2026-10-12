@@ -3,7 +3,7 @@
  * Quien necesite una herramienta se la pide por su nombre, 
  * sin tener que usar new con cada clase
  */
-public class HerramientaFabrica {
+public class HerramientaConstructor {
 
     /**
      * Crea una herramienta a partir de su nomnbre
